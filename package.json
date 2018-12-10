@@ -1,12 +1,12 @@
 {
   "name": "system-designs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Collection of Sytem Design Interview Prep Questions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["technical-interview", "software engineer", "interview"],
+  "author": "Tobiah Rex",
   "license": "ISC"
 }
