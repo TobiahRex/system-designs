@@ -1,20 +1,20 @@
 let memo = {}, GLOBAL_COUNT_LIMIT = 2;
 
-setTimeout(() => {
-  let scenarioID = startTest();
-  killScenario()
-}, 5000);
-
-
-let startTest = setInterval(() => {
+let intervalId = setInterval(() => {
   let users = ['bob', 'john', 'padro', 'pablo', 'flaco'];
-  let randomUser = Math.floor(Math.random() * 4);
+  let randomUser = users[Math.floor(Math.random() * 4)];
+  console.log(`   Init ${randomUser} request...`);
   try {
-    main(randomUser, Date.now());
+    console.log(main({ user_id: randomUser, time_stamp: Date.now() }));
   } catch (e) {
     console.log('Error: ', e);
   }
 }, 500);
+
+setTimeout(() => {
+  console.log('killing...');
+  killScenario(intervalId);
+}, 5000);
 
 function main({ user_id, time_stamp }){
   // the user's ID is already in the memo,
@@ -30,7 +30,7 @@ function main({ user_id, time_stamp }){
       // if not, reject the request.
     } else {
       if (memo[user_id].count >= GLOBAL_COUNT_LIMIT) {
-        return new Error('429 | Rate limit exceeded. Please try again later.');
+        return '429 | Rate limit exceeded. Please try again later.';
       } else {
         memo[user_id].count += 1;
       }
